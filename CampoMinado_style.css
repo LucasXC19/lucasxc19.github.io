@@ -17,8 +17,8 @@ button{
   width: 80%;
   height: 80%;
   background-color: #117799;
-  color: #aa7799;
-  font-size: 30px;
+  color: #117799;
+  font-size: 80vh;
 }
 .clicado{
   background-color: #66ccee;
