@@ -1,5 +1,5 @@
 ---
-title: Bem vido ao meu site!
+title: Matemática e jogos vão aparecer por aqui...
 ---
 
 <html>
