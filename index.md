@@ -7,6 +7,6 @@ title: Bem vido ao meu site!
     <meta charset = "utf-8"/>
   </head>
   <body>
-    <h1>Vou inserir links em breve...</h1>
+    <p href="CampoMinado.html">Campo Minado</p>
   </body>
 </html>
