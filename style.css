@@ -1,0 +1,25 @@
+h1{
+  text-align: center;
+}
+#tabuleiro{
+  width: 80%;
+  aspect-ratio: 1/1; 
+  display: grid;
+  grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+  grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+  justify-content: center;
+  background-color: blue; 
+  position: relative; 
+  top: 10%; 
+  left: 10%;
+}
+button{
+  width: 80%;
+  height: 80%;
+  background-color: #117799;
+  color: #117799;
+}
+.clicado{
+  background-color: #66ccee;
+}
+
