@@ -1,5 +1,5 @@
 ---
-title: Matemática e jogos vão aparecer por aqui...
+title: Matemática e Jogos
 ---
 
 <html>
