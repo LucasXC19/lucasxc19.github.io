@@ -38,7 +38,7 @@ function geraNumeros(){
   let numeros = [];
   while (numeros.length < 40){
     rd = parseInt(100*Math.random()+1);
-    if (numeros.indexOf(rd) == -1){
+    if (numeros.indexOf(rd.toString()) == -1){
       numeros.push(rd.toString());
       numeros.push(paraRomano(rd));
     }
