@@ -15,8 +15,6 @@ body{
   position: relative;
   height: 65vh;
   aspect-ratio: 3/4;
-  top: 0;
-  left: 10%;
 }
 
 .carta {
