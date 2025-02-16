@@ -1,8 +1,11 @@
 h1{
   text-align: center;
 }
+body{
+  justify-items: center;
+}
 #tabuleiro{
-  width: 80%;
+  height: 65vh;
   aspect-ratio: 1/1; 
   display: grid;
   grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
