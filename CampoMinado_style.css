@@ -5,16 +5,13 @@ body{
   justify-items: center;
 }
 #tabuleiro{
-  height: 65vh;
+  height: 60vh;
   aspect-ratio: 1/1; 
   display: grid;
   grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
   grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
   justify-content: center;
   background-color: blue; 
-  position: relative; 
-  top: 10%; 
-  left: 10%;
 }
 button{
   width: 80%;
