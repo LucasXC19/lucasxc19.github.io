@@ -13,8 +13,8 @@ body{
   background-color: green;
   justify-items: center;
   position: relative;
-  height: 65vh;
-  aspect-ratio: 3/4;
+  width: 66vmin;
+  height: 88vmin;
 }
 
 .carta {
