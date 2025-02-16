@@ -5,8 +5,8 @@ body{
   justify-items: center;
 }
 #tabuleiro{
-  height: 50vh;
-  aspect-ratio: 1/1; 
+  width: 80vmin;
+  height: 80vmin;
   display: grid;
   grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
   grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
