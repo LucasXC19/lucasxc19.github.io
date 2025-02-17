@@ -1,3 +1,4 @@
+//Campo Minado. Criado por Lucas Xavier
 //gera bombas
 let bombas = [];
 while (bombas.length < 10){
