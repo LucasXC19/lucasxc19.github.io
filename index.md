@@ -9,16 +9,51 @@ title: Matemática e Jogos
     <title>Matemática e Jogos</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background: linear-gradient(135deg, #f8fafc 0%, #cfe2ff 100%);
+      }
+      .card-jogo {
+        transition: transform 0.2s;
+      }
+      .card-jogo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #0d6efd55;
+      }
+      .titulo-site {
+        color: #0d6efd;
+        font-weight: bold;
+        text-shadow: 1px 1px 4px #fff;
+      }
+    </style>
   </head>
   <body>
     <div class="container mt-5">
-      <h1 class="mb-4 text-center">Matemática e Jogos</h1>
-      <div class="d-grid gap-3 col-6 mx-auto">
-        <a href="src/CampoMinado/CampoMinado.html" class="btn btn-primary btn-lg">Campo Minado</a>
-        <a href="src/JogoDaMemoria/JogoDaMemoria.html" class="btn btn-success btn-lg">Jogo da Memória Com Algarismos Romanos</a>
+      <h1 class="mb-4 text-center titulo-site">Matemática e Jogos</h1>
+      <div class="row justify-content-center">
+        <div class="col-md-5 mb-4">
+          <div class="card card-jogo shadow">
+            <img src="src/CampoMinado/campo-minado.png" class="card-img-top" alt="Campo Minado">
+            <div class="card-body text-center">
+              <h5 class="card-title">Campo Minado</h5>
+              <p class="card-text">Desafie sua lógica e atenção neste clássico jogo de raciocínio!</p>
+              <a href="src/CampoMinado/CampoMinado.html" class="btn btn-primary btn-lg">Jogar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 mb-4">
+          <div class="card card-jogo shadow">
+            <img src="src/JogoDaMemoria/jogo-memoria.png" class="card-img-top" alt="Jogo da Memória">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jogo da Memória</h5>
+              <p class="card-text">Encontre os pares entre números e algarismos romanos!</p>
+              <a href="src/JogoDaMemoria/JogoDaMemoria.html" class="btn btn-success btn-lg">Jogar</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Bootstrap JS (opcional, para componentes interativos) -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
