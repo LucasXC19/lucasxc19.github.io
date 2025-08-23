@@ -11,19 +11,20 @@ function paraRomano(num) {
     return num
   }
   const simbolosRomanos = [
-  { valor: 1000, simbolo: 'M' },
-  { valor: 900, simbolo: 'CM' },
-  { valor: 500, simbolo: 'D' },
-  { valor: 400, simbolo: 'CD' },
-  { valor: 100, simbolo: 'C' },
-  { valor: 90, simbolo: 'XC' },
-  { valor: 50, simbolo: 'L' },
-  { valor: 40, simbolo: 'XL' },
-  { valor: 10, simbolo: 'X' },
-  { valor: 9, simbolo: 'IX' },
-  { valor: 5, simbolo: 'V' },
-  { valor: 4, simbolo: 'IV' },
-  { valor: 1, simbolo: 'I' }];
+    { valor: 1000, simbolo: 'M' },
+    { valor: 900, simbolo: 'CM' },
+    { valor: 500, simbolo: 'D' },
+    { valor: 400, simbolo: 'CD' },
+    { valor: 100, simbolo: 'C' },
+    { valor: 90, simbolo: 'XC' },
+    { valor: 50, simbolo: 'L' },
+    { valor: 40, simbolo: 'XL' },
+    { valor: 10, simbolo: 'X' },
+    { valor: 9, simbolo: 'IX' },
+    { valor: 5, simbolo: 'V' },
+    { valor: 4, simbolo: 'IV' },
+    { valor: 1, simbolo: 'I' }
+  ];
   let result = '';
   for (const { valor, simbolo } of simbolosRomanos) {
     while (num >= valor) {
@@ -37,7 +38,7 @@ function paraRomano(num) {
 function geraNumeros(){
   let numeros = [];
   while (numeros.length < 40){
-    rd = parseInt(100*Math.random()+1);
+    let rd = parseInt(100*Math.random()+1);
     if (numeros.indexOf(rd.toString()) == -1){
       numeros.push(rd.toString());
       numeros.push(paraRomano(rd));
@@ -50,47 +51,52 @@ let numeros = embaralha(geraNumeros());
 
 function geraCartas(n) {
   for (let i = 1; i <= n; i++) {
-    carta = document.createElement("div");
-    carta.id = i.toString();
-    carta.setAttribute("class", "carta");
-    frente = document.createElement("div");
-    frente.setAttribute("class", "frente");
-    frente.innerHTML = numeros[i-1];
-    fundo = document.createElement("div");
-    fundo.setAttribute("class", "fundo");
-    imagem = document.createElement("img");
-    imagem.src = "carta.png";
-    carta.addEventListener("click", viraCarta);
-    fundo.appendChild(imagem);
-    carta.appendChild(frente);
-    carta.appendChild(fundo);
-    document.getElementById("mesa").appendChild(carta);
+    let $carta = $("<div></div>")
+      .attr("id", i.toString())
+      .addClass("carta");
+
+    let $frente = $("<div></div>")
+      .addClass("frente")
+      .html(numeros[i-1]);
+
+    let $fundo = $("<div></div>")
+      .addClass("fundo");
+
+    let $imagem = $("<img>")
+      .attr("src", "carta.png");
+
+    $fundo.append($imagem);
+    $carta.append($frente).append($fundo);
+    $carta.on("click", viraCarta);
+
+    $("#mesa").append($carta);
   }
 }
 
 let viradas = [];
 
 function viraCarta(){
-  if ((viradas.length < 2) && (viradas.indexOf(this.id) == -1)){
-    this.classList.toggle("gira");
-    viradas.push(this.id)
+  if ((viradas.length < 2) && (viradas.indexOf($(this).attr("id")) == -1)){
+    $(this).toggleClass("gira");
+    viradas.push($(this).attr("id"));
   }
-  if ((viradas.length == 2) && (this.id == viradas[1])){
-    let espera = setTimeout(desvira, 5000);
+  if ((viradas.length == 2) && ($(this).attr("id") == viradas[1])){
+    setTimeout(desvira, 5000);
     function desvira(){
-      document.getElementById(viradas[0]).classList.toggle("gira");
-      document.getElementById(viradas[1]).classList.toggle("gira");
-      let num1 = document.getElementById(viradas[0]).children[0].innerHTML;
-      let num2 = document.getElementById(viradas[1]).children[0].innerHTML;
+      $("#" + viradas[0]).toggleClass("gira");
+      $("#" + viradas[1]).toggleClass("gira");
+      let num1 = $("#" + viradas[0]).children(".frente").html();
+      let num2 = $("#" + viradas[1]).children(".frente").html();
       if (paraRomano(num1) == paraRomano(num2)){
-        document.getElementById(viradas[0]).style.visibility = "hidden";
-        document.getElementById(viradas[1]).style.visibility = "hidden";
+        $("#" + viradas[0]).css("visibility", "hidden");
+        $("#" + viradas[1]).css("visibility", "hidden");
       }
-      viradas.pop();
-      viradas.pop();
+      viradas = [];
     }
   }
 }
 
-geraCartas(40);
+$(document).ready(function() {
+  geraCartas(40);
+});
 
