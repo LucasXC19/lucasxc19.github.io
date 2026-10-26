@@ -72,12 +72,18 @@
     </div>
 
     <script>
-        // Dicionário de segurança: O QR Code revela apenas uma chave cifrada, escondendo o nome real do arquivo
+        // Mapeamento completo dos 10 instrumentos com chaves seguras
         const baseInstrumentos = {
-            "A7x9_k2": { nome: "Berimbau", arquivo: "berimbau.mp3" },
-            "B4m1_p9": { nome: "Atabaque", arquivo: "atabaque.mp3" },
-            "C3z8_l5": { nome: "Pandeiro", arquivo: "pandeiro.mp3" },
-            "D2w6_h4": { nome: "Caxixi", arquivo: "caxixi.mp3" }
+            "inst_01_a7x9": { nome: "Berimbau", arquivo: "berimbau.mp3" },
+            "inst_02_b4m1": { nome: "Atabaque", arquivo: "atabaque.mp3" },
+            "inst_03_c3z8": { nome: "Agogô", arquivo: "agogo.mp3" },
+            "inst_04_d2w6": { nome: "Afoxé", arquivo: "afoxe.mp3" },
+            "inst_05_e5k2": { nome: "Pandeiro", arquivo: "pandeiro.mp3" },
+            "inst_06_f6h3": { nome: "Reco-reco", arquivo: "reco_reco.mp3" },
+            "inst_07_g7j4": { nome: "Xequerê", arquivo: "xequere.mp3" },
+            "inst_08_h8l5": { nome: "Tambu", arquivo: "tambu.mp3" },
+            "inst_09_i9z6": { nome: "Caxixi", arquivo: "caxixi.mp3" },
+            "inst_10_j0x7": { nome: "Timba", arquivo: "timba.mp3" }
         };
 
         let audioAtual = null;
@@ -91,11 +97,10 @@
                 { facingMode: "environment" }, 
                 config, 
                 (decodedText) => {
-                    // Quando lê o QR Code com sucesso:
                     processarCodigo(decodedText);
                 },
                 (errorMessage) => {
-                    // Erros de varredura quadro a quadro (ignorar para não poluir o console)
+                    // Ignora erros quadro a quadro
                 }
             ).catch(err => {
                 document.getElementById("status").innerText = "Erro ao acessar a câmera. Permissão negada?";
@@ -103,13 +108,11 @@
         }
 
         function processarCodigo(codigo) {
-            // Para a câmera momentaneamente após ler
             html5QrCode.stop().then(() => {
                 if (baseInstrumentos[codigo]) {
                     const instrumento = baseInstrumentos[codigo];
-                    document.getElementById("status").innerText = `Instrumento Identificado! Tocando som...`;
+                    document.getElementById("status").innerText = `${instrumento.nome} Identificado! Tocando som...`;
                     
-                    // Toca o áudio correspondente
                     if (audioAtual) audioAtual.pause();
                     audioAtual = new Audio(instrumento.arquivo);
                     audioAtual.play();
@@ -142,7 +145,6 @@
             iniciarLeitor();
         }
 
-        // Inicia a câmera assim que a página carregar
         window.onload = () => {
             iniciarLeitor();
         };
