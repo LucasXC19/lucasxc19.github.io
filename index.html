@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Instrumentos - Educacional</title>
+    <!-- Biblioteca leve para leitura de QR Code via câmera -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+        #reader {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 5px;
+            width: 80%;
+        }
+        button:active {
+            background-color: #2980b9;
+        }
+        #status {
+            font-weight: bold;
+            margin-top: 15px;
+            color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Quiz Musical Educacional</h1>
+        <p>Aponte a câmera para o QR Code do instrumento:</p>
+        
+        <!-- Espaço onde a câmera do celular vai abrir -->
+        <div id="reader"></div>
+
+        <div id="status">Aguardando leitura...</div>
+
+        <!-- Controles de Áudio -->
+        <button id="btnPausa" onclick="alternarPausa()" style="display:none;">Pausar / Retomar</button>
+        <button onclick="reiniciarLeitura()">Escanear Outro</button>
+    </div>
+
+    <script>
+        // Dicionário de segurança: O QR Code revela apenas uma chave cifrada, escondendo o nome real do arquivo
+        const baseInstrumentos = {
+            "A7x9_k2": { nome: "Berimbau", arquivo: "berimbau.mp3" },
+            "B4m1_p9": { nome: "Atabaque", arquivo: "atabaque.mp3" },
+            "C3z8_l5": { nome: "Pandeiro", arquivo: "pandeiro.mp3" },
+            "D2w6_h4": { nome: "Caxixi", arquivo: "caxixi.mp3" }
+        };
+
+        let audioAtual = null;
+        let html5QrCode = null;
+
+        function iniciarLeitor() {
+            html5QrCode = new Html5Qrcode("reader");
+            const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+
+            html5QrCode.start(
+                { facingMode: "environment" }, 
+                config, 
+                (decodedText) => {
+                    // Quando lê o QR Code com sucesso:
+                    processarCodigo(decodedText);
+                },
+                (errorMessage) => {
+                    // Erros de varredura quadro a quadro (ignorar para não poluir o console)
+                }
+            ).catch(err => {
+                document.getElementById("status").innerText = "Erro ao acessar a câmera. Permissão negada?";
+            });
+        }
+
+        function processarCodigo(codigo) {
+            // Para a câmera momentaneamente após ler
+            html5QrCode.stop().then(() => {
+                if (baseInstrumentos[codigo]) {
+                    const instrumento = baseInstrumentos[codigo];
+                    document.getElementById("status").innerText = `Instrumento Identificado! Tocando som...`;
+                    
+                    // Toca o áudio correspondente
+                    if (audioAtual) audioAtual.pause();
+                    audioAtual = new Audio(instrumento.arquivo);
+                    audioAtual.play();
+
+                    document.getElementById("btnPausa").style.display = "inline-block";
+                } else {
+                    document.getElementById("status").innerText = "QR Code desconhecido!";
+                }
+            }).catch(err => {
+                console.log("Erro ao parar a câmera", err);
+            });
+        }
+
+        function alternarPausa() {
+            if (audioAtual) {
+                if (audioAtual.paused) {
+                    audioAtual.play();
+                    document.getElementById("status").innerText = "Retomando áudio...";
+                } else {
+                    audioAtual.pause();
+                    document.getElementById("status").innerText = "Áudio pausado.";
+                }
+            }
+        }
+
+        function reiniciarLeitura() {
+            if (audioAtual) audioAtual.pause();
+            document.getElementById("status").innerText = "Aguardando leitura...";
+            document.getElementById("btnPausa").style.display = "none";
+            iniciarLeitor();
+        }
+
+        // Inicia a câmera assim que a página carregar
+        window.onload = () => {
+            iniciarLeitor();
+        };
+    </script>
+</body>
+</html>
