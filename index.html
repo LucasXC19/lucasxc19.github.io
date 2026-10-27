@@ -79,11 +79,11 @@
             "inst_03_c3z8": { nome: "Agogô", arquivo: "agogo.mp3" },
             "inst_04_d2w6": { nome: "Afoxé", arquivo: "afoxe.mp3" },
             "inst_05_e5k2": { nome: "Pandeiro", arquivo: "pandeiro.mp3" },
-            "inst_06_f6h3": { nome: "Reco-reco", arquivo: "reco_reco.mp3" },
+            "inst_06_f6h3": { nome: "Reco-reco", arquivo: "recoreco.mp3" },
             "inst_07_g7j4": { nome: "Xequerê", arquivo: "xequere.mp3" },
             "inst_08_h8l5": { nome: "Tambu", arquivo: "tambu.mp3" },
             "inst_09_i9z6": { nome: "Caxixi", arquivo: "caxixi.mp3" },
-            "inst_10_j0x7": { nome: "Timba", arquivo: "timba.mp3" }
+            "inst_10_j0x7": { nome: "Timba", arquivo: "timbal.mp3" }
         };
 
         let audioAtual = null;
@@ -111,7 +111,7 @@
             html5QrCode.stop().then(() => {
                 if (baseInstrumentos[codigo]) {
                     const instrumento = baseInstrumentos[codigo];
-                    document.getElementById("status").innerText = `${instrumento.nome} Identificado! Tocando som...`;
+                    document.getElementById("status").innerText = `Identifique o instrumento pelo Som!`;
                     
                     if (audioAtual) audioAtual.pause();
                     audioAtual = new Audio(instrumento.arquivo);
